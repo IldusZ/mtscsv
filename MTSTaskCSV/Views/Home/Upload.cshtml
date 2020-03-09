@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Импорт CSV";
+}
+
+@model IEnumerable<MTSTaskCSV.Models.Person>
+
+<h2>Выбрать файл</h2>
+
+@using (Html.BeginForm("Upload", "Home", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <div class="form-group">
+        <label class="btn btn-default">
+            <input type="file" name="postedFile" hidden />
+        </label>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Импортировать" class="btn btn-default" />
+    </div>
+
+    if (Model != null)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FIO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Region)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Passport)
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FIO)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Region)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Passport)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+}
